@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'DangNhapAPI/form_login.dart';
 import 'ChangeColorApp/change_color_app.dart';
 import 'ChangeNumberApp/change_number_app.dart';
@@ -35,9 +36,11 @@ class HomeMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffF2F4F8),
+
+      // ===== APP BAR =====
       appBar: AppBar(
-        elevation: 0,
         centerTitle: true,
+        elevation: 0,
         title: const Text(
           'Menu Bài Tập',
           style: TextStyle(fontWeight: FontWeight.bold),
@@ -50,155 +53,132 @@ class HomeMenu extends StatelessWidget {
           ),
         ),
       ),
-      body: ListView(
-        padding: const EdgeInsets.all(16),
-        children: [
-          buildMenuItem(
-            context,
-            title: 'My Place',
-            icon: Icons.place_rounded,
-            color: Colors.orange,
-            page: const Place(),
-          ),
-          buildMenuItem(
-            context,
-            title: 'My Class',
-            icon: Icons.class_,
-            color: Colors.blue,
-            page: const MyClass(),
-          ),
-          buildMenuItem(
-            context,
-            title: 'Change Color',
-            icon: Icons.color_lens,
-            color: Colors.pink,
-            page: const ChangeColorApp(),
-          ),
-          buildMenuItem(
-            context,
-            title: 'Change Number',
-            icon: Icons.exposure_plus_1,
-            color: Colors.green,
-            page: const ChangeNumberApp(),
-          ),
-          buildMenuItem(
-            context,
-            title: 'Đăng nhập App',
-            icon: Icons.login,
-            color: Colors.deepPurple,
-            page: const DangNhapPage(),
-          ),
-          buildMenuItem(
-            context,
-            title: 'Đăng nhập API',
-            icon: Icons.api,
-            color: Colors.teal,
-            page: const FormDangNhap(),
-          ),
-          buildMenuItem(
-            context,
-            title: 'Đăng ký',
-            icon: Icons.app_registration,
-            color: Colors.indigo,
-            page: const DangKyApp(),
-          ),
-          buildMenuItem(
-            context,
-            title: 'Feedback',
-            icon: Icons.feedback,
-            color: Colors.amber,
-            page: const FeedbackPage(),
-          ),
-          buildMenuItem(
-            context,
-            title: 'My Layout',
-            icon: Icons.dashboard_customize,
-            color: Colors.cyan,
-            page: const MyLayout(),
-          ),
-          buildMenuItem(
-            context,
-            title: 'Shop',
-            icon: Icons.shopping_cart,
-            color: Colors.redAccent,
-            page: const MyProduct(),
-          ),
-          buildMenuItem(
-            context,
-            title: 'Tính BMI',
-            icon: Icons.monitor_weight,
-            color: Colors.brown,
-            page: BMIPage(),
-          ),
-          buildMenuItem(
-            context,
-            title: 'News App',
-            icon: Icons.newspaper,
-            color: Colors.blueGrey,
-            page: const MyNewsPage(),
-          ),
-        ],
-      ),
-    );
-  }
 
-  Widget buildMenuItem(
-    BuildContext context, {
-    required String title,
-    required IconData icon,
-    required Color color,
-    required Widget page,
-  }) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 14),
-      child: Material(
-        borderRadius: BorderRadius.circular(18),
-        elevation: 6,
-        color: Colors.white,
-        child: InkWell(
-          borderRadius: BorderRadius.circular(18),
-          onTap: () {
-            Navigator.push(
+      // ===== DRAWER =====
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Color(0xff667eea), Color(0xff764ba2)],
+                ),
+              ),
+              child: Text(
+                'Danh sách bài tập',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+
+            buildDrawerItem(
               context,
-              MaterialPageRoute(builder: (_) => page),
-            );
-          },
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 18,
+              title: 'My Place',
+              icon: Icons.place,
+              page: const Place(),
             ),
-            child: Row(
-              children: [
-                Container(
-                  width: 54,
-                  height: 54,
-                  decoration: BoxDecoration(
-                    color: color.withOpacity(0.15),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: Icon(icon, size: 28, color: color),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: Text(
-                    title,
-                    style: const TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-                const Icon(
-                  Icons.arrow_forward_ios_rounded,
-                  size: 16,
-                  color: Colors.grey,
-                ),
-              ],
+            buildDrawerItem(
+              context,
+              title: 'My Class',
+              icon: Icons.class_,
+              page: const MyClass(),
             ),
-          ),
+            buildDrawerItem(
+              context,
+              title: 'Change Color',
+              icon: Icons.color_lens,
+              page: const ChangeColorApp(),
+            ),
+            buildDrawerItem(
+              context,
+              title: 'Change Number',
+              icon: Icons.exposure_plus_1,
+              page: const ChangeNumberApp(),
+            ),
+            buildDrawerItem(
+              context,
+              title: 'Đăng nhập App',
+              icon: Icons.login,
+              page: const DangNhapPage(),
+            ),
+            buildDrawerItem(
+              context,
+              title: 'Đăng nhập API',
+              icon: Icons.api,
+              page: const FormDangNhap(),
+            ),
+            buildDrawerItem(
+              context,
+              title: 'Đăng ký',
+              icon: Icons.app_registration,
+              page: const DangKyApp(),
+            ),
+            buildDrawerItem(
+              context,
+              title: 'Feedback',
+              icon: Icons.feedback,
+              page: const FeedbackPage(),
+            ),
+            buildDrawerItem(
+              context,
+              title: 'My Layout',
+              icon: Icons.dashboard_customize,
+              page: const MyLayout(),
+            ),
+            buildDrawerItem(
+              context,
+              title: 'Shop',
+              icon: Icons.shopping_cart,
+              page: const MyProduct(),
+            ),
+            buildDrawerItem(
+              context,
+              title: 'Tính BMI',
+              icon: Icons.monitor_weight,
+              page: BMIPage(),
+            ),
+            buildDrawerItem(
+              context,
+              title: 'News App',
+              icon: Icons.newspaper,
+              page: const MyNewsPage(),
+            ),
+          ],
+        ),
+      ),
+
+      // ===== BODY =====
+      body: const Center(
+        child: Text(
+          'Chào Mừng Bạn Đã Đến Với My Project!',
+          style: TextStyle(fontSize: 18),
         ),
       ),
     );
   }
+
+  // ===== DRAWER ITEM =====
+  Widget buildDrawerItem(
+    BuildContext context, {
+    required String title,
+    required IconData icon,
+    required Widget page,
+  }) {
+    return ListTile(
+      leading: Icon(icon, color: Colors.deepPurple),
+      title: Text(title),
+      onTap: () {
+        Navigator.pop(context); // đóng Drawer
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => page),
+        );
+      },
+    );
+  }
 }
+
